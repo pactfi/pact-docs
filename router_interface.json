@@ -1,0 +1,177 @@
+{
+  "name": "PactRouter",
+  "desc": "Interface for a router contract that invokes multiple AMM contracts in a sequence",
+  "methods": [
+    {
+      "name": "OPTIN",
+      "desc": "Opt-in to assets before making a swap. Must call optout after the swaps.",
+      "args": [
+        {
+          "type": "uint64[]",
+          "name": "assets",
+          "desc": "The assets to opt-in to, references to these assets must be present in the asset array. The assets must be unique and must not be present in the contract account."
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "OPTOUT",
+      "desc": "Opt-out of assets after making a swap. Must only be called if opt-in was called before swaps. In such case, it must be called immediately after a swap. Assets and accounts arguments must have the same length. Each respective asset's creator must be referenced in `accounts`",
+      "args": [
+        {
+          "type": "uint64[]",
+          "name": "assets",
+          "desc": "The assets to opt-out from, references to these assets must be present in the asset array. Referenced assets must be the same as in opt-in call."
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "SWAP",
+      "desc": "Swap an asset for another via an AMM.",
+      "args": [
+        {
+          "type": "asset",
+          "name": "source_asset",
+          "desc": "The asset to be swapped."
+        },
+        {
+          "type": "asset",
+          "name": "target_asset",
+          "desc": "The asset to be received from swap."
+        },
+        {
+          "type": "application",
+          "name": "amm_ID",
+          "desc": "AMM which will perform the swap."
+        },
+        {
+          "type": "account",
+          "name": "address",
+          "desc": "Address of the AMM."
+        },
+        {
+          "type": "string",
+          "name": "interface",
+          "desc": "Interface to use for the AMM app call. Allowed strings: 'PACT_SWAP_ASA_ASA', 'PACT_SWAP_ASA_ALGOS', 'PACT_SWAP_ALGOS_ASA'"
+        },
+        {
+          "type": "uint64",
+          "name": "min_expected",
+          "desc": "Minimum expected amount of the target asset. Ignored if the next transaction in a group is another SWAP."
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "SWAP",
+      "desc": "Route swap of an asset for another via two AMMs. First perform a swap of sourceAsset",
+      "args": [
+        {
+          "type": "asset",
+          "name": "source_asset",
+          "desc": "The asset to be swapped."
+        },
+        {
+          "type": "asset",
+          "name": "target_asset",
+          "desc": "The asset to be received from the first swap."
+        },
+        {
+          "type": "application",
+          "name": "amm_ID",
+          "desc": "AMM which will perform the first swap."
+        },
+        {
+          "type": "account",
+          "name": "address",
+          "desc": "Address of the first AMM."
+        },
+        {
+          "type": "string",
+          "name": "interface",
+          "desc": "Interface to use for the first AMM app call. Allowed strings: 'PACT_SWAP_ASA_ASA', 'PACT_SWAP_ASA_ALGOS', 'PACT_SWAP_ALGOS_ASA'"
+        },
+        {
+          "type": "asset",
+          "name": "source_asset_2",
+          "desc": "The asset to be swapped in the second swap. Must be the same as target_asset."
+        },
+        {
+          "type": "asset",
+          "name": "target_asset_2",
+          "desc": "The asset to be received from the second swap."
+        },
+        {
+          "type": "application",
+          "name": "amm_ID_2",
+          "desc": "AMM which will perform the second swap."
+        },
+        {
+          "type": "account",
+          "name": "address_2",
+          "desc": "Address of the first AMM."
+        },
+        {
+          "type": "string",
+          "name": "interface_2",
+          "desc": "Interface to use for the first AMM app call. Allowed strings: 'PACT_SWAP_ASA_ASA', 'PACT_SWAP_ASA_ALGOS', 'PACT_SWAP_ALGOS_ASA'"
+        },
+        {
+          "type": "uint64",
+          "name": "min_expected",
+          "desc": "Minimum expected amount of the target asset (2). Ignored if the next transaction in a group is another SWAP."
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "SUPEROPTIN",
+      "desc": "Opt-in to assets permanently. Can only be called by the authorized address.",
+      "args": [
+        {
+          "type": "uint64[]",
+          "name": "assets",
+          "desc": "The assets to opt-in to, references to these assets must be present in the asset array. Referenced assets must be unique."
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "SUPEROPTOUT",
+      "desc": "Opt-out of assets permanently. Can only be called by the authorized address. Assets must have been opted-in to before. Assets and accounts arguments must have the same length",
+      "args": [
+        {
+          "type": "uint64[]",
+          "name": "assets",
+          "desc": "The assets to opt-out from, references to these assets must be present in the asset array."
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "DEPOSIT",
+      "desc": "Admin-only action: deposit Algos for future opt-ins.",
+      "args": [
+        {
+          "type": "pay",
+          "name": "depositTxn",
+          "desc": "Transaction depositing Algos to be available for future opt-ins"
+        }
+      ],
+      "returns": { "type": "void" }
+    },
+    {
+      "name": "WITHDRAW",
+      "desc": "Admin-only action: Withdraw surplus Algos from the contract. Must supply the ADMIN address in foreign accounts list.",
+      "args": [
+        {
+          "type": "uint64",
+          "name": "withdrawAmt",
+          "desc": "Amount of microAlgos to be sent to the ADMIN address."
+        }
+      ],
+      "returns": { "type": "void" }
+    }
+  ]
+}
