@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "PACT Swagger - OpenAPI 3.0",
+    "description": "This is the PACT API. ",
+    "termsOfService": "https://docs.pact.fi/pact/introduction/terms-and-conditions",
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Find out more about PACT",
+    "url": "https://docs.pact.fi/pact/introduction/about"
+  },
+  "servers": [
+    {
+      "url": "https://api.pact.fi/api/v1"
+    },
+    {
+      "url": "https://api.testnet.pact.fi/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Public endpoints",
+      "description": "Unauthenticated API endpoints"
+    }
+  ],
+  "paths": {
+    "/prices": {
+      "get": {
+        "tags": [
+          "Public endpoints"
+        ],
+        "summary": "Get the prices of assets traded in PACT",
+        "description": "Get the list of asset prices. The assets must have a pair in PACT and must meet the following criteria\\:\n1. Asset must be in a pool with over $1000 TVL.\n2. Asset must have pricing information in the database.\n\nPricing information is only available if either\\:\n- The asset in question has a trading pair with a stablecoin (USDC, USDt)\n- The asset in question has a trading pair with an asset that has a trading pair with a stablecoin (USDC, USDt)\n- The asset is a liquidity asset in a pool where both assets have a known price\n\nAlgo is represented by a special ID = \"0\". The aforementioned stablecoins (USDC, USDt) always have a price of \"1.00000000\". The quotes are denominated in USD.\n",
+        "operationId": "prices",
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "0": "0.26768069",
+                    "312769": "1.00000000",
+                    "31566704": "1.00000000",
+                    "251014570": "0.00008595",
+                    "386192725": "16486.49651486"
+                  },
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

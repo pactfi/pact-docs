@@ -11,4 +11,4 @@ In this directory documentation for a number of contracts is available:
 
 # API documentation
 
-Public API documentation is available [here](./api.md).
+Public API documentation is available [here](https://pactfi.github.io/pact-docs/swagger.html).
