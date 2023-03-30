@@ -7,7 +7,7 @@ Using a router allows the user to swap the entire amount and not worry about rec
 
 ## User roles
 
-- Swapper: Swaps assets through multiple AMMs
+- Swapper: Swaps assets through multiple pools
 - Admin: Can perform privileged operations
 - Updater: Can update the contract code
 - Deleter: Can delete the contract
@@ -120,11 +120,11 @@ Equally valid, albeit more expensive would be:
 
 ## Method signatures
 
-The available method signatures from the ABI are described in [../abi/router_interface.json](../abi/router_interface.json).
+The available method signatures from the ABI are described in [.router_interface.json](./router_interface.json).
 
 ### Checking minimum expected amount
 
-One of the parameters for the router swap is the minimum expected value. This works very similarly to the minimum expected in AMM swap.
+One of the parameters for the router swap is the minimum expected value. This works very similarly to the minimum expected in pool swap.
 It only makes sense to specify this parameter in the last swap in the sequence. Otherwise this parameter is ignored.
 
 Example txn group that uses the min_expected parameter:

@@ -1,12 +1,19 @@
 # Description of global state
 
-| Constant name      | API        | Description                                                                     |
-| ------------------ | ---------- | ------------------------------------------------------------------------------- |
-| TOTAL_LIQUIDITY    | `"L"`      | Total liquidity already distributed                                             |
-| TOTAL_PRIMARY      | `"A"`      | Amount of the primary asset or ALGO                                             |
-| TOTAL_SECONDARY    | `"B"`      | Amount of the secondary asset                                                   |
-| LIQUIDITY_TOKEN_ID | `"LTID"`   | Asset ID of liquidity token                                                     |
-| CONFIG             | `"CONFIG"` | Concatenated asset ID of primary asset, secondary asset and fee bps of the pool |
+| Constant name      | API               | Description                                                                     |
+| ------------------ | ----------------- | ------------------------------------------------------------------------------- |
+| TOTAL_LIQUIDITY    | `"L"`             | Total liquidity already distributed                                             |
+| TOTAL_PRIMARY      | `"A"`             | Amount of the primary asset or ALGO                                             |
+| TOTAL_SECONDARY    | `"B"`             | Amount of the secondary asset                                                   |
+| LIQUIDITY_TOKEN_ID | `"LTID"`          | Asset ID of liquidity token                                                     |
+| CONFIG             | `"CONFIG"`        | Concatenated asset ID of primary asset, secondary asset and fee bps of the pool |
+| CONTRACT_NAME      | `"CONTRACT_NAME"` | Contract's name, here "PACT AMM"                                                |
+| VERSION            | `"VERSION"`       | Contract's version                                                              |
+| ADMIN              | `"ADMIN"`         | Contract's admin                                                                |
+| TREASURY           | `"TREASURY"`      | Contract's treasury                                                             |
+| FEE_BPS            | `"FEE_BPS"`       | Contract's fee bps                                                              |
+| PACT_FEE_BPS       | `"PACT_FEE_BPS"`  | Contract's pact fee bps included in fee bps                                     |
+
 
 # List of possible transaction groups
 

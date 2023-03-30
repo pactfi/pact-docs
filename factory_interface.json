@@ -1,0 +1,160 @@
+{
+    "hints": {
+        "get_box_key": {
+            "read_only": true
+        }
+    },
+    "schema": {
+        "local": {
+            "declared": {},
+            "reserved": {}
+        },
+        "global": {
+            "declared": {
+                "deployed_contract_version": {
+                    "type": "uint64",
+                    "key": "POOL_CONTRACT_VERSION",
+                    "descr": "Version of deployed_contract"
+                },
+                "allowed_fee_bps": {
+                    "type": "bytes",
+                    "key": "ALLOWED_FEE_BPS",
+                    "descr": "List of fee bps possible to set in deployed contract"
+                },
+                "allowed_pact_fee_bps": {
+                    "type": "bytes",
+                    "key": "ALLOWED_PACT_FEE_BPS",
+                    "descr": "List of pact fees mapped 1:1 to allowed_fee_bps"
+                },
+                "admin": {
+                    "type": "bytes",
+                    "key": "ADMIN",
+                    "descr": "Pool administrator address used for building and factory updates"
+                },
+                "treasury": {
+                    "type": "bytes",
+                    "key": "TREASURY",
+                    "descr": "Treasury address used for building"
+                }
+            },
+            "reserved": {}
+        }
+    },
+    "contract": {
+        "name": "ExchangeFactory",
+        "methods": [
+            {
+                "name": "get_box_key",
+                "args": [
+                    {
+                        "type": "uint64",
+                        "name": "primary_asset_id"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "secondary_asset_id"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "fee_bps"
+                    }
+                ],
+                "returns": {
+                    "type": "byte[]"
+                },
+                "desc": "Get the box key for the exchange contract.\nThe box key can be used in lookup to search for a deployed contract."
+            },
+            {
+                "name": "build",
+                "args": [
+                    {
+                        "type": "asset",
+                        "name": "primary_asset"
+                    },
+                    {
+                        "type": "asset",
+                        "name": "secondary_asset"
+                    },
+                    {
+                        "type": "uint64",
+                        "name": "fee_bps"
+                    }
+                ],
+                "returns": {
+                    "type": "uint64"
+                },
+                "desc": "The cost to setup the pool is the same as usual.\nThe inner transactions needed to setup the pool are: - 4 from this contract - 2-3 from the exchange contract\nThe execution will terminate if the pool already exists or the pool fee is not supported."
+            },
+            {
+                "name": "post_update",
+                "args": [],
+                "returns": {
+                    "type": "void"
+                },
+                "desc": "State migrations after update"
+            },
+            {
+                "name": "change_admin",
+                "args": [
+                    {
+                        "type": "account",
+                        "name": "new_admin"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "change_treasury",
+                "args": [
+                    {
+                        "type": "account",
+                        "name": "new_treasury"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "create",
+                "args": [
+                    {
+                        "type": "account",
+                        "name": "admin"
+                    },
+                    {
+                        "type": "account",
+                        "name": "treasury"
+                    }
+                ],
+                "returns": {
+                    "type": "void"
+                }
+            },
+            {
+                "name": "lookup",
+                "args": [
+                    {
+                        "type": "byte[]",
+                        "name": "key"
+                    }
+                ],
+                "returns": {
+                    "type": "uint64"
+                },
+                "desc": "Find a contract by key and return its AppID"
+            }
+        ],
+        "networks": {
+            "wGHE2Pwdvd7S12BL5FaOP20EGYesN73ktiC1qzkkit8=": {
+                "appID": 1072843805
+            },
+            "SGO1GKSzyE7IEPItTxCByw9x8FmnrCDexi9/cOUJOiI=": {
+                "appID": 166540424
+            }
+        },
+        "desc": "Factory for exchange contracts"
+    }
+}

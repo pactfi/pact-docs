@@ -6,8 +6,9 @@ Repository with technical documentation on Pact's services
 
 In this directory documentation for a number of contracts is available:
 
+- [Constant Product](./constant_product.md) - Constant product pools
 - [Router](./router.md) - Route a transaction through a number of pools
-- [AMM](./amm.md) - Constant product amm
+- [Factory](./factory.md) - Build a pool
 
 # API documentation
 
